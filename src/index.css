@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ICONS */
+.icons {
+  @apply text-xl cursor-pointer rounded-md hover:bg-blue-200 size-7 p-1
+}
+
+/* HEADERS */
+.header-button {
+  @apply border-2 border-blue-500 text-white bg-blue-500 py-3 px-4 hover:bg-transparent hover:text-blue-500
+}
+
+.header-cart-no {
+  @apply absolute -top-3 left-4 text-sm bg-gray-200 rounded-full size-5 inline-flex items-center justify-center pointer-events-none
+}
+
+/* SWIPER CUSTOM CSS */
+.swiper {
+  overflow: visible !important;
+  overflow-x: hidden;
+}
+
+.swiper-pagination {
+  bottom: -40px !important;
+  /* background-color: red; */
+}
+
+.swiper-pagination-bullet {
+  width: 15px !important;
+  border-radius: 15px !important;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  width: 25px !important;
+  border-radius: 15px !important;
+}
+
+.Toastify__toast-icon {
+  font-family: "Poppins";
+}
+
+.check-quotation-heads {
+  @apply flex-1 items-start justify-start flex
+}
+
+.header-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.title-column {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.subtitle-column {
+  flex: 1;
+  padding-left: 20px;
+  border-left: 1px solid #ccc;
+  min-height: 100px;
+}
+
+.title-item {
+  margin: 10px 0;
+}
+
+.subheader-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.subheader-list li {
+  margin: 5px 0;
+}

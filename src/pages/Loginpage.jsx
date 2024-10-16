@@ -1,19 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import InputBox from '../components/InputBox';
 import InputPassword from '../components/InputPassword';
 import { FaSpinner } from '../icons';
 import { loginUser } from '../../utils/https';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+
 import Header from '../components/Header';
+import { AuthContext } from '../context/AuthContext';
 
 const LoginPage = () => {
-    const { logOut, isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // Ensure you access this from context
+    const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate(`/user/${user?.username}`)
+        }
+    }, [isAuthenticated])
 
     const navigate = useNavigate();
 
@@ -34,16 +41,18 @@ const LoginPage = () => {
             } else {
                 setIsError(false);
                 setMessage("User Successfully Logged In");
-                setIsAuthenticated(true); // Update the context here
-                navigate('/'); // Redirect to home page after login
+                setIsAuthenticated(true);
+                navigate('/');
             }
         } catch (error) {
             setIsError(true);
-            setMessage('An unexpected error occurred. Please try again.'); // Handle unexpected errors
+            setMessage('An unexpected error occurred. Please try again.');
         } finally {
-            setIsLoading(false); // Ensure loading is turned off
+            setIsLoading(false);
         }
     }
+
+
 
     return (
         <>

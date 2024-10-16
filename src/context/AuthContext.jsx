@@ -1,57 +1,49 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { protect } from '../../utils/https';
+import { protect } from '../../utils/https'; // Make sure this sends a request to validate token
 import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true); // Track loading state
-
-    const navigate = useNavigate()
-
-
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState({
         _id: '',
         email: '',
         username: '',
     });
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const checkAuth = async () => {
             const token = localStorage.getItem('authToken');
-
             if (token) {
-                console.log(token)
                 try {
-                    // Send a request to your protected route
-                    const response = await protect(token)
 
-                    console.log(response?.data?.data)
+                    const response = await protect(token);
+
                     setUser({
                         _id: response?.data?.data?._id,
                         username: response?.data?.data?.username,
                         email: response?.data?.data?.email,
                         role: response?.data?.data?.role,
-
-                    })
+                    });
 
                     setIsAuthenticated(true);
                 } catch (error) {
-                    console.log(error)
-                    console.error('Token validation failed:', error.response?.data?.message);
-                    console.error('Token validation failed:', error);
-                    setIsAuthenticated(false); // Set to false if token is invalid
+                    console.error("Token validation failed:", error);
+                    setIsAuthenticated(false); // Token is invalid, force logout
+                    localStorage.removeItem('authToken');
                 }
             } else {
                 setIsAuthenticated(false); // No token found
             }
-            setLoading(false); // Set loading to false after the check
+            setLoading(false); // Set loading to false after checking authentication
         };
 
         checkAuth();
-    }, [isAuthenticated, setIsAuthenticated]);
-
+    }, [setIsAuthenticated, isAuthenticated]);
 
     const logOut = () => {
         localStorage.removeItem('authToken');

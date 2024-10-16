@@ -40,7 +40,6 @@ const ProductsPageHeader = () => {
     useEffect(() => {
         const result = async () => {
             const data = await getProductHeader('productsHeader');
-            console.log(data?.headerData);
 
             const filtered = data?.headerData.filter(titles => titles.title !== '');
 

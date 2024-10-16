@@ -17,6 +17,7 @@ const Header = () => {
         setIsNavOpen(prev => !prev);
     }
 
+
     return (
         <header className='w-full bg-white/75 backdrop-blur-xl border-b border-blue-500 fixed top-0 left-0 z-40'>
             <nav className='w-full max-w-screen-2xl mx-auto py-5 flex items-center justify-between px-4'>

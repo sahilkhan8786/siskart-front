@@ -6,6 +6,7 @@ export const CartContext = createContext();
 // CartProvider Component
 export const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+    const [loading, setLoading] = useState(true);  // Add loading state
 
     // Load cart from localStorage when component mounts
     useEffect(() => {
@@ -13,6 +14,7 @@ export const CartContextProvider = ({ children }) => {
         if (storedCart) {
             setCart(JSON.parse(storedCart));  // Parse and set the cart from localStorage
         }
+        setLoading(false);  // Cart has finished loading
     }, []);
 
     // Save cart to localStorage whenever it changes
@@ -56,6 +58,7 @@ export const CartContextProvider = ({ children }) => {
     // Clear cart
     const clearCart = () => {
         setCart([]);  // Clear the cart
+        localStorage.removeItem('cart');
     };
 
     // Calculate total price
@@ -65,7 +68,6 @@ export const CartContextProvider = ({ children }) => {
             0
         );
     };
-
     const calculateTotalItems = () => {
         return cart.reduce((total, item) => total + item.quantity, 0);
     };
@@ -74,19 +76,20 @@ export const CartContextProvider = ({ children }) => {
         return cart.map(item => ({
             productsId: item._id,
             quantity: item.quantity
-        })); // Simplified using map
+        }));
     };
 
     // Context value
     const value = {
         cart,
+        loading,  // Expose loading state
         addItemToCart,
         updateItemQuantity,
         removeItemFromCart,
         clearCart,
         calculateTotal,
-        calculateTotalItems,
-        quotationItemsIds
+        quotationItemsIds,
+        calculateTotalItems
     };
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import InputBox from '../components/InputBox'
 import InputPassword from '../components/InputPassword';
 import { registerUser } from '../../utils/https';
@@ -8,7 +8,7 @@ import { AuthContext } from '../context/AuthContext';
 import Header from '../components/Header';
 
 const SignUpPage = () => {
-    const { setIsAuthenticated } = useContext(AuthContext)
+    const { setIsAuthenticated, isAuthenticated, user } = useContext(AuthContext)
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -19,6 +19,12 @@ const SignUpPage = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate(`/user/${user?.username}`)
+        }
+    }, [isAuthenticated])
 
     async function registerHandler(e) {
         e.preventDefault();
@@ -44,6 +50,8 @@ const SignUpPage = () => {
 
         setIsLoading(false)
     }
+
+
 
     return (
         <>

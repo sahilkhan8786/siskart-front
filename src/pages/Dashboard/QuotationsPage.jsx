@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { deleteQuotation, getQuotations } from '../../../utils/https';
 import { AuthContext } from '../../context/AuthContext';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 const monthNames = [
@@ -27,6 +27,7 @@ const QuotationsPage = () => {
         if (proceed) {
             const result = await deleteQuotation(`quotations/${id}`);
             console.log(result)
+            setTimeout(() => { }, 2000)
             toast.success("Quotation Successfully Deleted",);
 
             setRefreshData(prevState => !prevState);
@@ -48,6 +49,7 @@ const QuotationsPage = () => {
 
     return (
         <div>
+            <ToastContainer />
             <h1 className='my-4 text-3xl font-semibold'>Quotations</h1>
             <div className='flex flex-col gap-5 px-4'>
                 {
@@ -62,7 +64,7 @@ const QuotationsPage = () => {
                                     Requested At : {dateFormat(quotation.createdAt)}
                                 </p>
 
-                                {user.role === 'admin' && !quotation.isReviewed ?
+                                {user?.role === 'admin' && !quotation.isReviewed ?
                                     <p className='flex gap-3'>
                                         <Link to={`/checkQuotation/${quotation._id}`}>
                                             <button className='header-button'>Check Quotation</button>
@@ -85,13 +87,13 @@ const QuotationsPage = () => {
 
                             </div>
                             {
-                                <div div className=' ' >
+                                <div className=' ' >
                                     {user?.role === 'admin' && (
                                         <div className='flex items-center gap-5 '>
                                             <span>
                                                 Quotation Requested From :-
                                             </span>
-                                            <h1 className='text-xl'> {quotation.userId.username}</h1>
+                                            <h1 className='text-xl'> {quotation?.userId?.username}</h1>
                                         </div>
                                     )
                                     }

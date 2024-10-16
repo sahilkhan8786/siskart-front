@@ -1,18 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import DashboardSidebar from '../components/DashboardSidebar'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import { CartContextProvider } from '../context/CartContext'
 import { ToastContainer } from 'react-toastify'
 import Header from '../components/Header'
 const DashBoardLayout = () => {
 
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated } = useContext(AuthContext)
     const navigate = useNavigate();
+    const location = useLocation()
 
-    if (!isAuthenticated) {
-        navigate('/login')
-    }
+    useEffect(() => {
+
+        if (isAuthenticated && (location.pathname === '/login' || location.pathname === '/sign-up')) {
+            // Redirect to the home page
+            navigate('/');
+        }
+    }, [isAuthenticated, location.pathname, navigate]);
+
 
     return (
         <CartContextProvider>

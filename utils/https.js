@@ -190,10 +190,11 @@ export const approveQuotation = async (url) => {
     try {
         const response = await axios.get(url, {
             headers: {
-                "Content-Type": "application/pdf",
-                Authorization: `Bearer ${token}`
+
+                Authorization: `Bearer ${token}`,
+                "Content-Type": 'application/pdf',
             },
-            responseType: 'blob'
+            // responseType: 'blob'
         }
         )
         const blob = new Blob([response.data], { type: 'application/pdf' });
@@ -205,6 +206,7 @@ export const approveQuotation = async (url) => {
 
     } catch (error) {
         console.error('Error Creating Quotation:', error);
+        console.log(error.response)
         return error?.response;
     }
 

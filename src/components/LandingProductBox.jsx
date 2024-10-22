@@ -43,7 +43,7 @@ const Slider = ({ url }) => {
     useEffect(() => {
         (async () => {
             const productsArray = await fetchData(url);
-            setProducts(productsArray.data.data.products)
+            setProducts(productsArray?.data?.data.products)
 
         })();
     }, [])

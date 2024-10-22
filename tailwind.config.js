@@ -6,6 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1650px',
+        '4xl': '1860px',
+        '5xl': '2475px',
+        '6xl': '3400px',
+      },
       fontFamily: {
         'poppin': 'Poppins'
       }

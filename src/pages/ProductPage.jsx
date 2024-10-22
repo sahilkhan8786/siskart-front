@@ -44,7 +44,7 @@ const ProductPage = () => {
         })()
     }, [filterSearch])
     return (
-        <div>
+        <div >
             {/* VIEW TYPE - LIST/GRID */}
             <div className='bg-gray-100 flex w-full p-3 gap-12'>
                 <p

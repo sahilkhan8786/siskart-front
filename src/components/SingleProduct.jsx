@@ -27,7 +27,7 @@ const SingleProduct = ({ data, viewState }) => {
                             <p className=' text-center'> Brand - {data?.Brand}</p>
                             <div className='flex w-full items-center justify-center gap-6 flex-col sm:flex-row'>
                                 <button className='header-button w-full sm:w-fit whitespace-nowrap'
-                                    onClick={() => addItemToCart(data)}>
+                                    onClick={() => handleAddToCart(data)}>
                                     Add to Cart
                                 </button>
                                 <button className='header-button w-full sm:w-fit whitespace-nowrap'>Add to Wishlist</button>

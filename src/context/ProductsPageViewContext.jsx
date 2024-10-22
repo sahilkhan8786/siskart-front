@@ -3,9 +3,10 @@ import { createContext, useEffect, useState } from "react";
 export const ProductsPageViewContext = createContext();
 
 export const ProductsPageViewContextProvider = ({ children }) => {
-    const [isShowingSidebar, setIsShowingSidebar] = useState(window.innerWidth > 1024);
+    const [isShowingSidebar, setIsShowingSidebar] = useState(window.innerWidth > 1280);
     function handleResize(e) {
-        if (window.innerWidth < 1024) {
+        if (window.innerWidth < 1280) {
+
             setIsShowingSidebar(false)
         } else {
             setIsShowingSidebar(true)

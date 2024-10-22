@@ -29,20 +29,11 @@ const RootLayout = () => {
             <section className='w-full font-poppin'>
                 <ToastContainer />
                 <Header />
-                <div className='max-w-screen-2xl w-full mx-auto px-4 mt-36 sm:mt-40 md:mt-28 '>
-                    {isShowingSidebar && <aside className='w-[15%] h-fit   fixed z-50'>
+                <div className='max-w-screen-2xl w-full mx-auto xl:px-4 mt-48 sm:mt-52 md:mt-40 xl:mt-28'>
+                    {isShowingSidebar && <aside className='w-full  xl:w-[22%] h-fit   fixed z-50'>
                         <ProductsPageHeader />
                     </aside>}
-                    <div className={`${isShowingSidebar ? ' w-[75%]   ml-[25%]' : 'w-full '}`}>
-                        <p
-                            className={`flex lg:hidden gap-3 items-center  hover:text-blue-500 cursor-pointer`}
-                            onClick={() => setIsShowingSidebar(prev => !prev)}
-                        >
-                            <RiMenu3Fill />
-                            <span>
-                                View All Products
-                            </span>
-                        </p>
+                    <div className='w-full xl:w-[75%] xl:ml-[25%] p-3'>
                         <Outlet />
                     </div>
                 </div>

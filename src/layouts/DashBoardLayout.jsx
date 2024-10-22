@@ -25,7 +25,7 @@ const DashBoardLayout = () => {
             <section className='w-full font-poppin'>
                 <ToastContainer />
                 <Header />
-                <div className='max-w-screen-2xl w-full mx-auto px-4 mt-36 sm:mt-40 md:mt-28 flex'>
+                <div className='max-w-screen-2xl w-full mx-auto px-4 mt-48 sm:mt-40 md:mt-28 flex flex-col'>
                     <div>
                         <DashboardSidebar />
                     </div>

@@ -4,12 +4,13 @@ import { HeaderSearchBarDesktop, HeaderSearchBarMobile } from './HeaderSearchBar
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
-
+import { ProductsPageViewContext } from '../context/ProductsPageViewContext';
 
 
 const Header = () => {
     const { calculateTotalItems } = useContext(CartContext);
     const { isAuthenticated, user, logOut } = useContext(AuthContext);
+    const { isShowingSidebar, setIsShowingSidebar } = useContext(ProductsPageViewContext);
 
     const [isNavOpen, setIsNavOpen] = useState(false)
 
@@ -19,7 +20,7 @@ const Header = () => {
 
 
     return (
-        <header className='w-full bg-white/75 backdrop-blur-xl border-b border-blue-500 fixed top-0 left-0 z-40'>
+        <header className='w-full bg-white/75 backdrop-blur-xl border-b border-blue-500 fixed top-0 left-0 z-40 '>
             <nav className='w-full max-w-screen-2xl mx-auto py-5 flex items-center justify-between px-4'>
                 {/* LOGO */}
                 <Link to={'/'}>
@@ -92,6 +93,18 @@ const Header = () => {
             </nav>
             {/* SEARCH BAR  MOBILE VIEW VIEW*/}
             <HeaderSearchBarMobile />
+            <div className={`${isShowingSidebar && 'w-full '}`}>
+                <p
+                    className={`flex xl:hidden gap-3 items-center  hover:text-blue-500 cursor-pointer  p-4`}
+                    onClick={() => setIsShowingSidebar(prev => !prev)}
+                >
+                    <RiMenu3Fill />
+                    <span>
+                        {`${isShowingSidebar ? 'Close Sidebar' : 'View All Products'} `}
+                    </span>
+                </p>
+
+            </div>
 
 
         </header>

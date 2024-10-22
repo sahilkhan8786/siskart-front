@@ -194,7 +194,7 @@ export const approveQuotation = async (url) => {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": 'application/pdf',
             },
-            // responseType: 'blob'
+            responseType: 'blob'
         }
         )
         const blob = new Blob([response.data], { type: 'application/pdf' });

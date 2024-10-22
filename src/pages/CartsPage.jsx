@@ -1,18 +1,23 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { toast } from 'react-toastify';
 import { reqQuotation } from '../../utils/https';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 
 const CartsPage = () => {
-    const { cart, calculateTotal, quotationItemsIds, clearCart } = useContext(CartContext)
+    const { cart, calculateTotal, quotationItemsIds, clearCart, updateItemQuantity, removeItemFromCart } = useContext(CartContext)
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const confirmClearCart = () => { }
+    const confirmClearCart = () => {
+        const proceed = window.confirm("Are you sure? it cannot be reversible");
+        if (proceed) {
+            clearCart();
+        };
+
+    }
 
 
 
@@ -86,6 +91,15 @@ const CartsPage = () => {
                     <button className='header-button' onClick={confirmRequestHandler}>
                         Request Quotation
                     </button>
+                </div>
+            }
+            {
+                cart.length > 0 && !user?.username && <div className='flex w-full justify-end my-6'>
+                    <Link to={'/login'}>
+                        <button className='header-button' >
+                            Login to Request Quotation
+                        </button>
+                    </Link>
                 </div>
             }
         </div >

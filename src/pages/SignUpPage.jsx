@@ -3,7 +3,7 @@ import InputBox from '../components/InputBox'
 import InputPassword from '../components/InputPassword';
 import { registerUser } from '../../utils/https';
 import { FaSpinner } from '../icons'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import Header from '../components/Header';
 
@@ -56,7 +56,7 @@ const SignUpPage = () => {
     return (
         <>
             <Header />
-            <div className=' max-w-6xl mx-auto py-8 mt-32 p-3 font-poppin'>
+            <div className=' max-w-6xl mx-auto py-8 mt-44 p-3 font-poppin'>
 
                 <h1 className='text-4xl font-semibold text-left uppercase'>Sign Up</h1>
                 <form className='flex flex-col w-full' onSubmit={registerHandler}>
@@ -108,6 +108,11 @@ const SignUpPage = () => {
                             'Sign Up'
                         }
                     </button>
+                    <p className='text-center mt-3'>Alreadt have an Account? &nbsp;
+                        <Link to={'/login'}>
+                            <span className='text-blue-500 cursor-pointer hover:underline hover:text-blue-900'>Log In</span>
+                        </Link>
+                    </p>
                 </form>
             </div>
         </>

@@ -3,7 +3,7 @@ import InputBox from '../components/InputBox';
 import InputPassword from '../components/InputPassword';
 import { FaSpinner } from '../icons';
 import { loginUser } from '../../utils/https';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Header from '../components/Header';
 import { AuthContext } from '../context/AuthContext';
@@ -57,7 +57,7 @@ const LoginPage = () => {
     return (
         <>
             <Header />
-            <div className='max-w-6xl mx-auto py-8 mt-32 p-3 font-poppin'>
+            <div className='max-w-6xl mx-auto py-8 mt-44 p-3 font-poppin'>
                 <h1 className='text-4xl font-semibold text-left uppercase'>Log In</h1>
                 <form className='flex flex-col w-full' onSubmit={loginHandler}>
                     <div className='my-6'>
@@ -92,6 +92,12 @@ const LoginPage = () => {
                     >
                         {isLoading ? <FaSpinner className='animate-spin text-center' /> : 'Log In'}
                     </button>
+
+                    <p className='text-center mt-3'>Dont have an Account?&nbsp;
+                        <Link to={'/sign-up'}>
+                            <span className='text-blue-500 cursor-pointer hover:underline hover:text-blue-900'>Sign Up</span>
+                        </Link>
+                    </p>
                 </form>
             </div>
         </>
